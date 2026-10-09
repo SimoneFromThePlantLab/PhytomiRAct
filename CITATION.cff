@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use PhytomiRAct, please cite the associated manuscript and this software repository."
+title: "PhytomiRAct: tissue-level plant microRNA activity inference from single-cell transcriptomes"
+type: software
+authors:
+  - family-names: Castellana
+    given-names: Simone
+version: 1.0.0
+date-released: 2026-09-30
+repository-code: "https://github.com/USERNAME/PhytomiRAct"
+abstract: "PhytomiRAct is a standalone R framework to infer tissue-level plant microRNA activity from annotated plant single-cell RNA-seq datasets."
+license: MIT
+keywords:
+  - plant microRNA
+  - single-cell RNA-seq
+  - Seurat
+  - post-transcriptional regulation
+  - target prediction
