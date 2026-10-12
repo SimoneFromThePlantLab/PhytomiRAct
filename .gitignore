@@ -1,0 +1,41 @@
+# R session files
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# R project files
+*.Rproj
+
+# Large or local input data
+*.rds
+*.RDS
+
+# Keep only the small example Seurat object
+!example_data/ath_root_downsampled_exampre.rds
+
+# FASTA files
+*.fa
+*.fasta
+*.fa.gz
+*.fasta.gz
+
+# Keep only the example Arabidopsis cDNA FASTA
+!example_data/cDNA_arabidopsis_TAIR10.fa
+
+# Generated PhytomiRAct outputs
+*_target_sites.tsv
+*_gene_targets.csv
+delta_by_tissue.csv
+activity_by_tissue.csv
+UMAP_activity_tissue_level.tiff
+dotplot_activity_tissue_level.tiff
+seurat_with_activity.rds
+
+# Keep README files in results folders
+results/*
+!results/README.md
+
+# System files
+.DS_Store
+Thumbs.db
