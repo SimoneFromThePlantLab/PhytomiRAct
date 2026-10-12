@@ -27,6 +27,9 @@ PhytomiRAct/
 ├── NEWS.md
 ├── examples/
 │   └── example_run.R
+├── example_data/
+│   ├── ath_root_downsampled_exampre.rds
+│   └── cDNA_arabidopsis_TAIR10.fa
 ├── data-raw/
 │   ├── miRNA_sequences.tsv
 │   ├── dataset_accessions.tsv
@@ -37,13 +40,13 @@ PhytomiRAct/
     └── README.md
 ```
 
-Large Seurat objects, reference FASTA files, and generated result files are not included in the repository. Dataset accession numbers, miRNA sequences, and reference transcriptome information are provided in `data-raw/`.
+Large full-size Seurat objects, complete reference FASTA files, and generated result files are not included in the repository. Dataset accession numbers, miRNA sequences, and reference transcriptome information are provided in `data-raw/`. A small downsampled Arabidopsis root Seurat object and a corresponding example cDNA FASTA file are provided in `example_data/` only to test the workflow.
 
 ## Installation
 
 PhytomiRAct is distributed as a standalone R script. Clone or download this repository and source the script in R.
 
-```r
+```bash
 git clone https://github.com/SimoneFromThePlantLab/PhytomiRAct.git
 ```
 
@@ -131,6 +134,49 @@ res <- runPhytomiRAct(
   target_stringency = "strict",
   use_precomputed_sites = TRUE
 )
+```
+
+## Example dataset
+
+A small downsampled *Arabidopsis thaliana* root Seurat object is provided in `example_data/` to allow users to test PhytomiRAct without downloading large public datasets.
+
+The example files are:
+
+```text
+example_data/ath_root_downsampled_exampre.rds
+example_data/cDNA_arabidopsis_TAIR10.fa
+```
+
+The example Seurat object contains raw counts, a `tissue` metadata column, and a UMAP reduction. The example cDNA FASTA file is provided to allow the workflow to run directly from the repository.
+
+This example is intended only as a minimal runnable test of PhytomiRAct and should not be used for biological interpretation.
+
+```r
+library(Seurat)
+
+source("PhytomiRAct.R")
+
+ath_root <- readRDS("example_data/ath_root_downsampled_exampre.rds")
+
+res <- runPhytomiRAct(
+  seurat_obj = ath_root,
+  mirna_sequence = "UCGGACCAGGCUUCAUUCCCC",
+  mirna_name = "ath-miR165_166_example",
+  tissue_col = "tissue",
+  cdna_fasta = "example_data/cDNA_arabidopsis_TAIR10.fa",
+  output_dir = "results/example_ath_miR165_166",
+  assay = "RNA",
+  reduction = "umap",
+  min_counts_per_cell = 1000,
+  target_stringency = "strict",
+  use_precomputed_sites = TRUE
+)
+```
+
+The output files will be written to:
+
+```text
+results/example_ath_miR165_166/
 ```
 
 ## Main function
@@ -229,7 +275,9 @@ Activity values should therefore be interpreted as relative tissue-level ranking
 
 ## Data availability
 
-Large input files are not distributed through this repository. Users should download the original single-cell datasets and reference transcriptomes from the sources listed in `data-raw/dataset_accessions.tsv` and `data-raw/reference_transcriptomes.md`.
+Full-size input files are not distributed through this repository. Users should download the original single-cell datasets and reference transcriptomes from the sources listed in `data-raw/dataset_accessions.tsv` and `data-raw/reference_transcriptomes.md`.
+
+A small downsampled Arabidopsis root Seurat object and an example cDNA FASTA file are included in `example_data/` only to provide a minimal runnable example of the PhytomiRAct workflow.
 
 ## License
 
